@@ -42,15 +42,22 @@ const HOUSES = [
     id: "madaket",
     name: "Kimberly Way",
     number: "01",
-    tagline: "Classic Nantucket 5 bed / 6 bath",
+    tagline: "Classic Nantucket 5 bed / 4.5 bath",
     location: "In-town",
     bedrooms: 5,
-    bathrooms: 6,
-    sleeps: 10,
+    bathsLabel: "4 full / 1 half",
+    sleeps: 9,
+    toBeach: "1 mile",
+    toTown: "0.5 miles",
+    petFriendly: "No",
     sqft: 4100,
     accent: C.rose,
     blurb:
-      "Direct beachfront on the island's wild western edge, where the Atlantic and Nantucket Sound meet. Floor-to-ceiling glass faces the most celebrated sunsets in New England. A wide cedar deck steps directly onto soft white sand.",
+      "Located in Town, off of a private lane on Kimberly Way. This five bedroom and 4½ bath house boasts over 4,000 square feet of living space on four finished levels. The large grand living room with high coffered ceiling has a gas fireplace; the eat-in kitchen has marble counters and is open to the dining room. Off the kitchen is a TV room, den, and a half bath.",
+    blurbExtra: [
+      "Second Floor: Primary king bedroom ensuite. Two bedrooms (queen and two twins) share a hall bath (shower). Laundry.",
+      "Lower Level: Billiard room, home theater, and wet bar.",
+    ],
     history:
       "Built new in 2017 to the highest standards of contemporary shingle-style architecture, with reclaimed barn beams and crushed-oyster paths.",
     amenities: [
@@ -71,12 +78,20 @@ const HOUSES = [
     tagline: "Beach-Style 4 bed / 3 bath",
     location: "In-town",
     bedrooms: 4,
-    bathrooms: 3,
+    bathsLabel: "3 full",
     sleeps: 8,
+    toBeach: "0.5 miles",
+    toTown: "0.8 miles",
+    petFriendly: "No",
     sqft: 3200,
     accent: C.hydrangea,
     blurb:
-      "Perched on the eastern bluff just steps from the red-and-white striped lighthouse, this shingled retreat looks out over the Atlantic from nearly every room. Mornings are for coffee on the wraparound porch; evenings, for hydrangea-lined walks to the cliff path.",
+      "Recently renovated and beautifully refreshed, this charming four-bedroom Cape-style home offers comfortable living spaces and an ideal location close to town, beaches, and area conveniences. A private brick patio framed by lush privet hedges creates a quiet outdoor retreat, complemented by a small garden area perfect for relaxing after a day at the beach.",
+    blurbExtra: [
+      "The first floor features an open-concept layout with connected living, dining, and kitchen spaces that feel bright and welcoming. Just off the kitchen is a convenient mudroom entry. Also on the main level are a twin bedroom, a queen bedroom, and a full bath with tub-and-shower combination.",
+      "Upstairs, the second floor includes two private bedroom suites. One offers twin beds with an ensuite bath featuring a shower, while the spacious king bedroom also includes its own private shower bath.",
+      "Additional amenities include a lower-level laundry area, outdoor patio space, and easy access to nearby shuttle bus stops, bike paths, beaches, and Town.",
+    ],
     history:
       "Originally built in 1923 as a captain's summer residence, restored down to the wide-plank floors in 2019 with respectful, unflashy taste.",
     amenities: [
@@ -94,15 +109,23 @@ const HOUSES = [
     id: "sconset",
     name: "Vestal Street",
     number: "03",
-    tagline: "Elegant 6 bed / 6 bath",
+    tagline: "Elegant 5 bed / 4.5 bath",
     location: "Top of Main Street",
-    bedrooms: 6,
-    bathrooms: 6,
-    sleeps: 12,
+    bedrooms: 5,
+    bathsLabel: "4 full / 1 half",
+    sleeps: 10,
+    toBeach: "2 miles",
+    toTown: "0.5 miles",
+    petFriendly: "No",
     sqft: 4200,
     accent: C.seafoam,
     blurb:
-      "A storybook cottage in 'Sconset's historic village, climbing roses across its facade and a hidden English-style garden behind the picket fence. Steps to the bluff walk, the post office, and the chapel that bells the hour.",
+      "Tucked away on a peaceful historic lane just one block from Main Street, this custom-built Colonial offers the perfect blend of charm, comfort, and space. Designed with gatherings and relaxed coastal living in mind, this beautifully maintained rental home features inviting indoor and outdoor living areas, including a spacious sun deck, covered porch, and professionally landscaped yard.",
+    blurbExtra: [
+      "The first floor welcomes you with a warm living room centered around a fireplace, an open dining area, and a large, thoughtfully designed kitchen. Also on the main level is a generous primary suite with a king bed and private bath featuring both a soaking tub and separate shower. A laundry room, half bath, central air conditioning, attached one-car garage, and brick parking area for two additional vehicles add convenience and functionality. The covered porch includes an outdoor dining table with seating for six, creating an ideal setting for summer entertaining.",
+      "Upstairs, the second floor offers an additional living room with TV along with four bedrooms and three full baths. Accommodations include a twin bedroom and a king bedroom sharing a bath with tub/shower, a king suite with its own private shower bath, and a separate twin bedroom with private entrance and ensuite shower bath.",
+      "The finished lower level is designed for entertainment, complete with a pool table, ping pong table, and a home theater with seating for nine.",
+    ],
     history:
       "One of the original 'fish houses' from the 1870s, lovingly preserved with low ceilings, hand-hewn beams, and a working hearth.",
     amenities: [
@@ -1086,13 +1109,14 @@ function HousePage({ houseId, setCurrentHouse, setPage }) {
 
       {/* Stats strip */}
       <section style={{ background: C.paperWarm }}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {[
-            { icon: Bed,     label: "Bedrooms",  value: house.bedrooms },
-            { icon: Bath,    label: "Bathrooms", value: house.bathrooms },
-            { icon: Users,   label: "Sleeps",    value: house.sleeps },
-            { icon: MapPin,  label: "Location",  value: house.location.split(" · ")[0] },
-            { icon: Sparkles, label: "Sq. Feet",  value: house.sqft.toLocaleString() },
+            { icon: Users,    label: "Sleeps",        value: house.sleeps },
+            { icon: Bed,      label: "Bedrooms",      value: house.bedrooms },
+            { icon: Bath,     label: "Baths",         value: house.bathsLabel },
+            { icon: Waves,    label: "To Beach",      value: house.toBeach },
+            { icon: Compass,  label: "To Town",       value: house.toTown },
+            { icon: Sparkles, label: "Pet Friendly",  value: house.petFriendly },
           ].map((s, i) => {
             const Icon = s.icon;
             return (
@@ -1102,7 +1126,7 @@ function HousePage({ houseId, setCurrentHouse, setPage }) {
                   <div style={{ fontFamily: FONT_UI, color: C.muted, fontSize: "0.65rem" }} className="cy-tracking uppercase">
                     {s.label}
                   </div>
-                  <div style={{ fontFamily: FONT_DISPLAY, color: C.ink, fontSize: "1.5rem", fontWeight: 400, lineHeight: 1.2, marginTop: 4 }}>
+                  <div style={{ fontFamily: FONT_DISPLAY, color: C.ink, fontSize: "1.4rem", fontWeight: 400, lineHeight: 1.2, marginTop: 4 }}>
                     {s.value}
                   </div>
                 </div>
@@ -1125,7 +1149,12 @@ function HousePage({ houseId, setCurrentHouse, setPage }) {
             <p style={{ fontFamily: FONT_BODY, color: C.inkSoft, fontSize: "1.075rem", lineHeight: 1.75 }}>
               {house.blurb}
             </p>
-            <p style={{ fontFamily: FONT_BODY, color: C.muted, fontSize: "0.95rem", lineHeight: 1.75, marginTop: "1.25rem", fontStyle: "italic" }}>
+            {house.blurbExtra && house.blurbExtra.map((para, i) => (
+              <p key={i} style={{ fontFamily: FONT_BODY, color: C.inkSoft, fontSize: "1.075rem", lineHeight: 1.75, marginTop: "1.25rem" }}>
+                {para}
+              </p>
+            ))}
+            <p style={{ fontFamily: FONT_BODY, color: C.muted, fontSize: "0.95rem", lineHeight: 1.75, marginTop: "1.75rem", fontStyle: "italic" }}>
               {house.history}
             </p>
           </div>
